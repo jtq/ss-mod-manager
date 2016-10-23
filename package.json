@@ -26,7 +26,7 @@
     "react-dom": "^15.3.2"
   },
   "scripts": {
-    "build": "cpy index.html build && browserify index.js -o build/bundle.js -t [ babelify --presets [ es2015 react ] ]",
+    "build": "cpy index.html build && cpy styles.css build && browserify index.js -o build/bundle.js -t [ babelify --presets [ es2015 react ] ]",
     "start": "nw"
   }
 }

@@ -29,15 +29,16 @@ class List extends React.Component {
     console.log("Rendered");
 
     var items = this.state.items.map((item, index) => {
+      let className = this.state.selected[index] ? 'selected' : '';
       return(
-        <li key={index}>
-          <label><input type="checkbox" defaultChecked={this.state.selected[index]} onChange={this.toggleSelected.bind(this, index, item)} />{item.title}</label>
+        <li key={index} onClick={this.toggleSelected.bind(this, index, item)} className={className}>
+          {item.title}
         </li>
       );
     })
 
     return (
-      <ul>
+      <ul className="List">
         {items}
       </ul>
     );
