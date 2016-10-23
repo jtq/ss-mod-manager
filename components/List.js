@@ -13,7 +13,7 @@ class List extends React.Component {
     })
 
     return (
-      <ul className="List">
+      <ul className="List" style={this.props.style}>
         {items}
       </ul>
     );
