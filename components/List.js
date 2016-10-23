@@ -2,24 +2,45 @@ var React = require('react');
 
 class List extends React.Component {
 	constructor(props) {
-		super();
+		super(props);
 
-    this.items = props.data.map((item) => {
-  		return(
-  			<li key={item.name}>
-  				<label><input type="checkbox" checked={item.checked} /> {item.title}</label>
-  			</li>
-  		);
-  	});
+    this.state = {
+    	items: props.data
+    };
+
 	}
 
-  render(props) {
-	  return (
-    	<ul>
-      	{this.items}
-    	</ul>
+  toggleEnabled(index, event) {
+    var items = this.state.items;
+    items[index].selected = !items[index].selected;
+    this.setState({
+      items: items
+    });
+  }
+
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  }
+
+  render() {
+    console.log("Rendered");
+
+    var items = this.state.items.map((item, index) => {
+      return(
+        <li key={item.id}>
+          <label><input type="checkbox" defaultChecked={item.checked} onChange={this.toggleEnabled.bind(this, index)} />{item.title}</label>
+        </li>
+      );
+    })
+
+    return (
+      <ul>
+        {items}
+      </ul>
     );
-	}
+  }
 }
 
 module.exports = List;
