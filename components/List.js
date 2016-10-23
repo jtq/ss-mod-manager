@@ -5,16 +5,17 @@ class List extends React.Component {
 		super(props);
 
     this.state = {
-    	items: props.data
+    	items: props.data,
+      selected: []
     };
 
 	}
 
-  toggleEnabled(index, event) {
-    var items = this.state.items;
-    items[index].selected = !items[index].selected;
+  toggleSelected(index, event) {
+    var selected = this.state.selected;
+    selected[index] = !selected[index];
     this.setState({
-      items: items
+      selected: selected
     });
   }
 
@@ -29,8 +30,8 @@ class List extends React.Component {
 
     var items = this.state.items.map((item, index) => {
       return(
-        <li key={item.id}>
-          <label><input type="checkbox" defaultChecked={item.checked} onChange={this.toggleEnabled.bind(this, index)} />{item.title}</label>
+        <li key={index}>
+          <label><input type="checkbox" defaultChecked={this.state.selected[index]} onChange={this.toggleSelected.bind(this, index, item)} />{item.title}</label>
         </li>
       );
     })
