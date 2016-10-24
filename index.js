@@ -29,6 +29,14 @@ class App extends React.Component {
     });
   }
 
+  handleEnableToggle() {
+    var items = this.state.data;
+    items[this.state.selectedId].enabled = !items[this.state.selectedId].enabled;
+    this.setState({
+      data: items
+    });
+  }
+
   render() {
 
     let containerStyle = {
@@ -50,7 +58,7 @@ class App extends React.Component {
     return (
       <div style={containerStyle}>
         <List data={this.state.data} selected={this.state.selectedId} onClick={this.handleSelection.bind(this)} style={modListStyle} />
-        <DetailsPane mod={this.state.data[this.state.selectedId]} style={detailsStyle} />
+        <DetailsPane mod={this.state.data[this.state.selectedId]} style={detailsStyle} onClick={this.handleEnableToggle.bind(this)} />
       </div>
     );
   }

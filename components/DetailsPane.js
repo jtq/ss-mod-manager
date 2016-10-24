@@ -1,18 +1,16 @@
 var React = require('react');
 
 function ModEnableControl(props) {
-  let headerStyle = {
-    margin: '0 0.25em'
-  };
-  let enableDisableStyle = {
-    float: 'right'
-  };
+  let enabledState = props.enabled ? 'enabled' : '';
   return (
     <div>
-      <h1 style={headerStyle}>{props.title}</h1>
-      <div style={enableDisableStyle}>
-        {props.enabled}
+      <div className="mod-toggle">
+        <div className={'toggle-container ' + enabledState} onClick={props.onClick}>
+          <div className="toggle-thumb">
+          </div>
+        </div>
       </div>
+      <h1 className="mod-name">{props.title}</h1>
     </div>
   );
 }
@@ -20,15 +18,20 @@ function ModEnableControl(props) {
 function DetailsPane(props) {
   var title = '';
   var enabled = '';
+  let content = '';
   if(props.mod) {
     title = props.mod.title;
     enabled = props.mod.enabled;
+    content = <ModEnableControl title={title} enabled={enabled} onClick={props.onClick} />;
+  }
+  else {
+    content = <em>Please select a mod</em>;
   }
 
   return (
-  <div style={props.style}>
-    <ModEnableControl title={title} enabled={enabled} />
-  </div>
+    <div style={props.style}>
+      {content}
+    </div>
   );
 }
 
