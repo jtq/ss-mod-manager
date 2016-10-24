@@ -15,6 +15,21 @@ body {
 	padding: 0.25rem;
 }
 
+.List li .enabled-icon {
+	float: right;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #c0c0c0;
+    border-radius: 0.25rem;
+    background-color: #e0e0e0;
+    transition: background-color 1s, border-color 1s;
+}
+
+.List li .enabled-icon.enabled {
+    background-color: #4040ff;
+	border-color: #0000ff;
+}
+
 .selected {
 	background-color: #8080ff;
 }

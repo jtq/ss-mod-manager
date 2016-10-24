@@ -4,10 +4,11 @@ class List extends React.Component {
   render() {
     var items = Object.keys(this.props.data).map((itemId) => {
       let item = this.props.data[itemId];
-      let className = this.props.selected === item.id ? 'selected' : '';
+      let selectedState = this.props.selected === item.id ? 'selected' : '';
+      let enabledState = item.enabled ? 'enabled' : '';
       return(
-        <li key={item.id} onClick={this.props.onClick.bind(this, item.id, item)} className={className}>
-          {item.title}
+        <li key={item.id} onClick={this.props.onClick.bind(this, item.id, item)} className={selectedState}>
+          {item.title} <span className={'enabled-icon ' + enabledState}></span>
         </li>
       );
     })
