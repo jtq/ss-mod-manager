@@ -2,3 +2,4 @@ package.sublime-workspace
 build/
 node_modules/
 all-mods/
+addon/
