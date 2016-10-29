@@ -1,36 +1,35 @@
 var React = require('react');
 
-function ModEnableControl(props) {
+function ModTitleControl(props) {
+  return <h1 className="mod-name">{props.title}</h1>;
+}
+
+function ModStatusControl(props) {
   let enabledState = props.enabled ? 'enabled' : '';
   return (
-    <div>
-      <div className="mod-toggle">
-        <div className={'toggle-container ' + enabledState} onClick={props.onClick}>
-          <div className="toggle-thumb">
-          </div>
+    <div className="mod-toggle">
+      <div className={'toggle-container ' + enabledState} onClick={props.onClick}>
+        <div className="toggle-thumb">
         </div>
       </div>
-      <h1 className="mod-name">{props.title}</h1>
     </div>
   );
 }
 
 function DetailsPane(props) {
-  var title = '';
-  var enabled = '';
-  let content = '';
+  let title = '', status = '';
   if(props.mod) {
-    title = props.mod.title;
-    enabled = props.mod.enabled;
-    content = <ModEnableControl title={title} enabled={enabled} onClick={props.onClick} />;
+    status = <ModStatusControl enabled={props.mod.enabled} onClick={props.onClick} />;
+    title = <ModTitleControl title={props.mod.title} />;
   }
   else {
-    content = <em>Please select a mod</em>;
+    title = <ModTitleControl title="No mod selected" />;
   }
 
   return (
     <div style={props.style}>
-      {content}
+      {status}
+      {title}
     </div>
   );
 }
