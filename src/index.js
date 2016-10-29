@@ -8,23 +8,28 @@ var path = require('path');
 var ssMods = require('./ss-mods');
 
 var allModsDir = process.cwd() + path.sep + 'all-mods';
+var enabledModsDir = process.cwd() + path.sep + 'addon';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
 
-    var mods = ssMods.loadModsFromDir(allModsDir);
+    var enabledModNames = ssMods.getModsInDir(enabledModsDir);
+    var allModsList = ssMods.loadModsFromDir(allModsDir);
 
-    var allMods = {};
-    mods.forEach((mod) => { allMods[mod.id] = mod });
+    var allModsMap = {};
+    allModsList.forEach((mod) => {
+      if(enabledModNames.includes(mod.id)) {
+        mod.enabled = true;
+      }
+      allModsMap[mod.id] = mod;
+    });
 
     this.state = {
       selectedId: null,
-      data: allMods
+      data: allModsMap
     };
-
-    
   }
 
   getModById(id) {

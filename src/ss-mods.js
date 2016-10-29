@@ -49,28 +49,39 @@ class Mod {
   }
 }
 
-function loadModsFromDir(modsPath, console) {
+function loadModsFromDir(modsPath) {
 
   result = [];
 
-  let files = fs.readdirSync(modsPath);
+  let mods = getModsInDir(modsPath);
 
-  files.forEach((fileName) => {
-    let newMod = loadModFromDir(modsPath + path.sep + fileName, console);
+  mods.forEach((modPath) => {
+    let newMod = loadModFromDir(modsPath + path.sep + modPath);
     result.push(newMod);
   });
 
   return result;
 }
 
+function getModsInDir(modsPath) {
+
+  return fs.readdirSync(modsPath).reduce((mods, fileName) => {
+    if(fs.lstatSync(modsPath + path.sep + fileName).isDirectory()) {
+      mods.push(fileName);
+    }
+    return mods;
+  }, []);
+}
+
 function loadModFromDir(modPath) {
   var id = path.basename(modPath);
-  let mod = new Mod(id, modPath, console);
+  let mod = new Mod(id, modPath);
   return mod;
 }
 
 module.exports = {
   Mod: Mod,
+  getModsInDir: getModsInDir,
   loadModsFromDir: loadModsFromDir,
   loadModFromDir: loadModFromDir
 };
