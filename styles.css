@@ -7,8 +7,9 @@ body {
 }
 
 .List {
-	margin: 0;
+	margin: 0 -0.25rem 0 0;
 	padding: 0;
+	border-right: 0.25rem solid #e0e0e0;
 }
 
 .List li {
@@ -35,11 +36,34 @@ body {
 	background-color: #8080ff;
 }
 
-.mod-name {
-	float: left;
-	margin: 0.5rem;
+.DetailsPane {
 }
 
+.DetailsPane header.mod-info, .DetailsPane section.mod-readme {
+	margin: 0 0 0 0.25rem;
+	overflow: auto;
+}
+
+.DetailsPane section.mod-readme {
+	clear: both;
+}
+
+.mod-details {
+}
+
+.mod-details .mod-name {
+	margin: 0.5rem;
+	line-height: 1.7rem;
+}
+
+.mod-details .mod-version {
+	float: right;
+	clear: right;
+}
+
+.mod-details .mod-author {
+	float: left;
+}
 
 .mod-toggle {
 	float: right;
@@ -47,18 +71,19 @@ body {
 }
 
 .toggle-container {
-	width: 4rem;
-	height: 2rem;
+	width: 3.4rem;
+	height: 1.7rem;
 	position: relative;
 	border: 1px solid #c0c0c0;
+	margin: -1px 0;
 	background-color: #e0e0e0;
 	transition: background-color 1s, border-color 1s;
 	border-radius: 0.5rem;
 }
 
 .toggle-thumb {
-	width: 2rem;
-	height: 2rem;
+	width: 50%;
+	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -75,5 +100,5 @@ body {
 }
 
 .toggle-container.enabled .toggle-thumb {
-	left: 2rem;
+	left: 50%;
 }

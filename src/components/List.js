@@ -8,7 +8,8 @@ class List extends React.Component {
       let enabledState = item.enabled ? 'enabled' : '';
       return(
         <li key={item.id} onClick={this.props.onClick.bind(this, item.id, item)} className={selectedState}>
-          {item.title} <span className={'enabled-icon ' + enabledState}></span>
+          <span className={'enabled-icon ' + enabledState}></span>
+          {item.title}
         </li>
       );
     })
