@@ -3,7 +3,6 @@ var ReactDOM = require('react-dom');
 var List = require("./components/List");
 var DetailsPane = require("./components/DetailsPane");
 
-
 class App extends React.Component {
 
   constructor(props) {
