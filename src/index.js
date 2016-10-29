@@ -3,19 +3,28 @@ var ReactDOM = require('react-dom');
 var List = require("./components/List");
 var DetailsPane = require("./components/DetailsPane");
 
+var path = require('path');
+
+var ssMods = require('./ss-mods');
+
+var allModsDir = process.cwd() + path.sep + 'all-mods';
+
 class App extends React.Component {
 
   constructor(props) {
     super(props);
 
+    var mods = ssMods.loadModsFromDir(allModsDir);
+
+    var allMods = {};
+    mods.forEach((mod) => { allMods[mod.id] = mod });
+
     this.state = {
       selectedId: null,
-      data: {
-        mod1: { title:'Mod 1', id:'mod1', enabled:false },
-        mod2: { title:'Mod 2', id:'mod2', enabled:false },
-        mod3: { title:'Mod 3', id:'mod3', enabled:false }
-      }
+      data: allMods
     };
+
+    
   }
 
   getModById(id) {
