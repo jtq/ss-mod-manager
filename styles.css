@@ -41,7 +41,12 @@ body {
 
 .DetailsPane header.mod-info, .DetailsPane section.mod-readme {
 	margin: 0 0 0 0.25rem;
+	padding: 0.5rem;
 	overflow: auto;
+}
+
+.DetailsPane header.mod-info {
+	border-bottom: 0.125rem solid #e0e0e0;
 }
 
 .DetailsPane section.mod-readme {
@@ -52,7 +57,7 @@ body {
 }
 
 .mod-details .mod-name {
-	margin: 0.5rem;
+	margin: 0 0 0.5rem;
 	line-height: 1.7rem;
 }
 
@@ -67,7 +72,7 @@ body {
 
 .mod-toggle {
 	float: right;
-	margin: 0.5rem;
+	margin: 0 0 0.5rem 0.5rem;
 }
 
 .toggle-container {
