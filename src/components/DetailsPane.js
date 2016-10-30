@@ -1,5 +1,7 @@
 var React = require('react');
 
+var markdown = require('markdown').markdown;
+
 function ModAuthorControl(props) {
   var name = '', email = '', url = '';
   if(props.name) {
@@ -46,14 +48,17 @@ function ModStatusControl(props) {
 }
 
 function DetailsPane(props) {
-  let title = '', status = '';
+  let title = '', status = '', readme = '';
   if(props.mod) {
     status = <ModStatusControl enabled={props.mod.enabled} onClick={props.onClick} />;
     title = <ModTitleControl title={props.mod.title} version={props.mod.version} author={props.mod.author} />;
+    readme = markdown.toHTML(props.mod.readme);
   }
   else {
     title = <ModTitleControl title="No mod selected" />;
   }
+
+  readme = { __html:readme };
 
   return (
     <article className="DetailsPane" style={props.style}>
@@ -61,7 +66,7 @@ function DetailsPane(props) {
         {status}
         {title}
       </header>
-      <section className="mod-readme"></section>
+      <section className="mod-readme" dangerouslySetInnerHTML={ readme }></section>
     </article>
   );
 }

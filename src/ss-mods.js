@@ -34,9 +34,10 @@ class Mod {
     this.version = '';
     this.author = '';
     this.title = '';
+    this.readme = '';
 
     try {
-      let modData = JSON.parse(fs.readFileSync(modPath + path.sep + 'package.json'));
+      let modData = JSON.parse(fs.readFileSync(modPath + path.sep + 'package.json', { encoding:'utf8'} ));
       this.description = modData.description;
       this.version = modData.version;
       this.author = parseAuthor(modData.author);
@@ -45,6 +46,12 @@ class Mod {
     catch (e) {
       this.title = this.id;
       this.author = parseAuthor(null);
+    }
+
+    try {
+      this.readme = fs.readFileSync(modPath + path.sep + 'README.md', { encoding:'utf8'} );
+    }
+    catch(e) {
     }
   }
 }
