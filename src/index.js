@@ -3,6 +3,8 @@ var ReactDOM = require('react-dom');
 var List = require("./components/List");
 var DetailsPane = require("./components/DetailsPane");
 
+var NwGui = require('nw.gui');
+
 var path = require('path');
 
 var ssMods = require('./ss-mods');
@@ -28,7 +30,8 @@ class App extends React.Component {
 
     this.state = {
       selectedId: null,
-      data: allModsMap
+      data: allModsMap,
+      gui: NwGui
     };
   }
 
@@ -71,9 +74,20 @@ class App extends React.Component {
     return (
       <div style={containerStyle}>
         <List data={this.state.data} selected={this.state.selectedId} onClick={this.handleSelection.bind(this)} style={modListStyle} />
-        <DetailsPane mod={this.state.data[this.state.selectedId]} style={detailsStyle} onClick={this.handleEnableToggle.bind(this)} />
+        <DetailsPane mod={this.state.data[this.state.selectedId]} gui={this.state.gui} style={detailsStyle} onClick={hijackLink} onToggleEnabled={this.handleEnableToggle.bind(this)} />
       </div>
     );
+  }
+}
+
+function hijackLink(e) {
+  var clickedElement = e.target;
+  if(clickedElement.tagName.toUpperCase() === 'A') {
+    var href = clickedElement.href;
+    if(!href.match(/^chrome\-extension\:\/\//)) { // If not an internal link into this page
+      e.preventDefault();
+      NwGui.Shell.openExternal(href);
+    }
   }
 }
 

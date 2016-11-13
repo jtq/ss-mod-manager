@@ -28,7 +28,7 @@ function ModTitleControl(props) {
   if(props.version) {
     version = <span className="mod-version">v{props.version}</span>;
   }
-  return <section className="mod-details">
+  return <section className="mod-details" onClick={props.onClick}>
     <h1 className="mod-name">{props.title}</h1>
     {version}
     {author}
@@ -50,8 +50,8 @@ function ModStatusControl(props) {
 function DetailsPane(props) {
   let title = '', status = '', readme = '';
   if(props.mod) {
-    status = <ModStatusControl enabled={props.mod.enabled} onClick={props.onClick} />;
-    title = <ModTitleControl title={props.mod.title} version={props.mod.version} author={props.mod.author} />;
+    status = <ModStatusControl enabled={props.mod.enabled} onClick={props.onToggleEnabled} />;
+    title = <ModTitleControl title={props.mod.title} version={props.mod.version} author={props.mod.author} onClick={props.onClick} />;
     readme = markdown.toHTML(props.mod.readme);
   }
   else {
@@ -66,7 +66,7 @@ function DetailsPane(props) {
         {status}
         {title}
       </header>
-      <section className="mod-readme" dangerouslySetInnerHTML={ readme }></section>
+      <section className="mod-readme" dangerouslySetInnerHTML={ readme } onClick={props.onClick}></section>
     </article>
   );
 }
